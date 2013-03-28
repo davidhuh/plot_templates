@@ -1,9 +1,9 @@
-##### Adapted from an example written by Matt Cooper (mattcstats@gmail.com)
+##### Adapted from an example written by Matt Cooper
 ## Original version: 
 ##   http://mcfromnz.wordpress.com/2012/11/06/forest-plots-in-r-ggplot-with-side-table/
 
 #### STEP 1:  Fit a regression (Example: Owls data from glmmADMB package) ####
-
+## install.packages("glmmADMB", repos="http://r-forge.r-project.org")
 library(glmmADMB)
 
 Owls <- transform(Owls,
