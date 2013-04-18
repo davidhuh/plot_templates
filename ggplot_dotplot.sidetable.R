@@ -26,7 +26,8 @@ fitted.model2  <- glmmadmb(NCalls ~ (FoodTreatment+ArrivalTime.c)*SexParent + Br
 #### STEP 2: Extract the regression estimates from the fitted model ####
 
 ## Load utility function
-source("formatforplot.R")
+library(devtools)
+source_url("https://raw.github.com/davidhuh/plot_templates/master/formatforplot.R")
 
 model1.table <- formatforplot(fitted.model1,
                               model.name="Negative Binomial (NB1)",
