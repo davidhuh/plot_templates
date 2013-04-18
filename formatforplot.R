@@ -1,7 +1,22 @@
-## Utility function that extracts estimates for fitted regression models and outputs
-## numeric and formatted string versions suitable for plotting
+### Description:
+##    A utility function that extracts estimates from fitted regression models and outputs
+##    numeric and formatted string versions suitable for plotting
+##
+###  Original Author: David Huh
+##
+###  Suggests: lme4, glmmadmb, pscl
+##
+###  Arguments:        obj  = a fitted regression model
+##              parm.names  = parameter names (default: names from fitted model)
+##              model.name  = name of the regression model (default: object name)
+##                   eform  = output exponentiated coefficients (default: TRUE)
+##                   scale  = scale regression coefficients by a constant (default: 1)
+##                     rnd  = decimal points of precision (default: 2)
+##
+###  Values:  A data frame of raw and formatted regression results
+##
 
-formatforplot <- function(obj, parm.names=names(coef(obj)), model.name=deparse(substitute(obj)), eform=TRUE, rnd = 2) {
+formatforplot <- function(obj, parm.names=names(coef(obj)), model.name=deparse(substitute(obj)), eform=TRUE, scale = 1, rnd = 2) {
   ## load the appropriate library for reading the fitted regression objected
   obj.class <- class(obj)
   if (obj.class=="lme") require(lme4, quietly=TRUE)
@@ -10,8 +25,8 @@ formatforplot <- function(obj, parm.names=names(coef(obj)), model.name=deparse(s
   
   rndtostr <- function(val, dig=rnd) formatC(round(val, rnd), format="f", digits=rnd)
   
-  beta <- unname(coef(obj))
-  se <- unname(sqrt(diag(vcov(obj))))
+  beta <- unname(coef(obj)) * scale
+  se <- unname(sqrt(diag(vcov(obj)))) * scale
   lower <- beta - 1.959964*se
   upper <- beta + 1.959964*se
   zstat <- abs(beta/se)
