@@ -22,6 +22,7 @@ formatforplot <- function(obj, parm.names=names(coef(obj)), model.name=deparse(s
   if (obj.class=="lme") require(lme4, quietly=TRUE)
   if (obj.class=="glmmadmb") require(glmmADMB, quietly=TRUE)
   if (obj.class=="hurdle" | obj.class=="zeroinfl") require(pscl, quietly=TRUE)
+  if (obj.class=="zelig") require(Zelig, quietly=TRUE)
   
   rndtostr <- function(val, dig=rnd) formatC(round(val, rnd), format="f", digits=rnd)
   
